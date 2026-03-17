@@ -261,7 +261,7 @@ export default function DisputeSubmission() {
 
   useEffect(() => {
     api.get(`/trades/${tradeId}`).then(res => setTrade(res.data.trade));
-  }, [tradeId]);
+  }, [tradeId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRaiseDispute = async (e) => {
     e.preventDefault();

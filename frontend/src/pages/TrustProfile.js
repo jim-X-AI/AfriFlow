@@ -23,7 +23,7 @@ export default function TrustProfile() {
       .then(res => setData(res.data))
       .catch(() => navigate('/my-trades'))
       .finally(() => setLoading(false));
-  }, [userId]);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const copyProfileLink = () => {
     const url = `${window.location.origin}/profile/${userId}`;

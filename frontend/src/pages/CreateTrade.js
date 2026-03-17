@@ -35,7 +35,7 @@ export default function CreateTrade() {
 
   useEffect(() => {
     api.get('/profile/all').then(res => setUsers(res.data.users));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (form.supplier_id) {
@@ -95,7 +95,9 @@ export default function CreateTrade() {
               <option value="">Choose a verified supplier...</option>
               {users.filter(u => u.user.id !== user?.id).map(u => (
                 <option key={u.user.id} value={u.user.id}>
-                  {u.user.business_name} — {u.user.location} (Score: {Math.round(u.trust_score?.overall_score || 50)}/100)
+                  {u.user.business_name} — {u.user.location}
+                  {u.user.products_traded?.length > 0 ? ` · ${u.user.products_traded.slice(0,2).join(', ')}` : ''}
+                  {` (Score: ${Math.round(u.trust_score?.overall_score || 50)}/100)`}
                 </option>
               ))}
             </select>
@@ -212,6 +214,13 @@ export default function CreateTrade() {
                 <div>
                   <p className="font-semibold text-white text-sm">{selectedSupplier.business_name}</p>
                   <p className="text-xs text-gray-500">{selectedSupplier.location}</p>
+                  {selectedSupplier.products_traded?.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {selectedSupplier.products_traded.slice(0, 3).map(p => (
+                        <span key={p} className="text-xs bg-border text-gray-400 px-1.5 py-0.5 rounded">{p}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex items-center justify-between">

@@ -7,7 +7,6 @@
 
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
 
 // ── IDVerificationResult component ───────────────────────────
@@ -191,7 +190,6 @@ function StepIndicator({ step, total }) {
 // ── Main component ─────────────────────────────────────────────
 
 export default function Register() {
-  const { login } = useAuth();
   const navigate   = useNavigate();
 
   const [step, setStep]     = useState(1);

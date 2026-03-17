@@ -14,7 +14,6 @@ const STATUS_CONFIG = {
 };
 
 const STEPS = ['Funded', 'Awaiting Shipment', 'In Transit', 'Delivered', 'Settled'];
-const STEP_STATUS = ['funded', 'funded', 'in_transit', 'delivered', 'settled'];
 
 export default function TradeCard({ trade, buyer, supplier, escrow }) {
   const config = STATUS_CONFIG[trade.status] || STATUS_CONFIG['pending_acceptance'];

@@ -13,7 +13,7 @@ export default function DeliveryConfirmation() {
 
   useEffect(() => {
     api.get(`/trades/${tradeId}`).then(res => setData(res.data));
-  }, [tradeId]);
+  }, [tradeId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleConfirm = async () => {
     setLoading(true);
@@ -28,7 +28,7 @@ export default function DeliveryConfirmation() {
   };
 
   if (!data) return null;
-  const { trade, escrow, supplier } = data;
+  const { trade, supplier } = data;
 
   if (confirmed) return (
     <div className="max-w-lg mx-auto px-6 py-8 fade-in">

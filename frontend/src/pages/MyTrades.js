@@ -35,7 +35,7 @@ export default function MyTrades() {
       if (s) setTrust(s.data);
       setUsers(u.data.users);
     }).finally(() => setLoading(false));
-  }, [user?.id]);
+  }, [user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const allTrades = [
     ...trades.as_buyer.map(t => ({ ...t, role: 'buyer' })),
@@ -74,18 +74,10 @@ export default function MyTrades() {
       </div>
 
       {/* Quick actions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <QuickAction icon="📝" label="New Trade" onClick={() => navigate('/trade/create')} primary />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <QuickAction icon="📝" label="New Trade"  onClick={() => navigate('/trade/create')} primary />
         <QuickAction icon="👤" label="My Profile" onClick={() => navigate(`/profile/${user?.id}`)} />
-        {users.slice(0,2).map(u => (
-          <QuickAction
-            key={u.user.id}
-            icon={u.user.avatar_initials}
-            label={`View ${u.user.business_name.split(' ')[0]}`}
-            onClick={() => navigate(`/profile/${u.user.id}`)}
-            isInitials
-          />
-        ))}
+        <QuickAction icon="🔍" label="Find Traders" onClick={() => navigate('/trade/create')} />
       </div>
 
       {/* Trades */}

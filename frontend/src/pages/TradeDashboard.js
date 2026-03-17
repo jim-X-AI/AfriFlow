@@ -21,6 +21,10 @@ export default function TradeDashboard() {
       .catch(() => navigate('/my-trades'))
       .finally(() => setLoading(false));
   }, [tradeId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    fetch();
+    const interval = setInterval(fetch, 5000);
     return () => clearInterval(interval);
   }, [fetch]);
 
