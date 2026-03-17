@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+const API_URL = "https://afriflow-f5df.onrender.com";
+
+fetch({API_URL}/api/data.json)
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || '/api',
   timeout: 30000,
