@@ -17,44 +17,44 @@ export default function EscrowDeposit() {
     api.get(`/trades/${tradeId}`).then(res => setData(res.data));
   }, [tradeId]);
 
-  const handleDeposit = async () => {
-  setLoading(true);
-  try {
-    const res = await api.post(`/trades/${tradeId}/deposit`, { payment_method: payMethod });
-    const { gateway_url, payload } = res.data;
+//   const handleDeposit = async () => {
+//   setLoading(true);
+//   try {
+//     const res = await api.post(`/trades/${tradeId}/deposit`, { payment_method: payMethod });
+//     const { gateway_url, payload } = res.data;
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = gateway_url;
+//     const form = document.createElement('form');
+//     form.method = 'POST';
+//     form.action = gateway_url;
 
-    Object.entries(payload).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      form.appendChild(input);
-    });
+//     Object.entries(payload).forEach(([key, value]) => {
+//       const input = document.createElement('input');
+//       input.type = 'hidden';
+//       input.name = key;
+//       input.value = value;
+//       form.appendChild(input);
+//     });
 
-    document.body.appendChild(form);
-    form.submit();
+//     document.body.appendChild(form);
+//     form.submit();
 
-  } catch (e) {
-    alert(e.response?.data?.error || 'Deposit failed.');
-    setLoading(false);
-  }
-};
+//   } catch (e) {
+//     alert(e.response?.data?.error || 'Deposit failed.');
+//     setLoading(false);
+//   }
+// };
 
 // Handle return from Interswitch
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const paymentStatus = params.get('payment');
-  if (paymentStatus === 'success') {
-    setDeposited(true);
-    setReference(params.get('txnref') || '');
-  } else if (paymentStatus === 'failed') {
-    alert('Payment failed. Please try again.');
-  }
-}, []);
+// useEffect(() => {
+//   const params = new URLSearchParams(window.location.search);
+//   const paymentStatus = params.get('payment');
+//   if (paymentStatus === 'success') {
+//     setDeposited(true);
+//     setReference(params.get('txnref') || '');
+//   } else if (paymentStatus === 'failed') {
+//     alert('Payment failed. Please try again.');
+//   }
+// }, []);
 
   if (!data) return <div className="flex justify-center py-20"><div className="flex gap-1.5"><div className="w-2 h-2 bg-brand-500 rounded-full dot-bounce" /><div className="w-2 h-2 bg-brand-500 rounded-full dot-bounce" /><div className="w-2 h-2 bg-brand-500 rounded-full dot-bounce" /></div></div>;
 
@@ -160,7 +160,7 @@ useEffect(() => {
         ))}
       </div>
 
-      <button onClick={handleDeposit} disabled={loading} className="btn-primary w-full text-center text-lg py-4">
+      <button onClick={void 0} disabled={loading} className="btn-primary w-full text-center text-lg py-4">
         {loading ? (
           <span className="flex items-center justify-center gap-2">
             <div className="w-2 h-2 bg-white rounded-full dot-bounce" />
