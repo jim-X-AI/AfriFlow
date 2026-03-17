@@ -19,12 +19,12 @@ export default function TrustScoreUpdate() {
     if (user) {
       api.get(`/trust/${user.id}`).then(res => setTrust(res.data));
     }
-  }, [tradeId, user?.id]);
+  }, [tradeId, user?.id, user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const t = setTimeout(() => setShowScore(true), 800);
     return () => clearTimeout(t);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data || !trust) return null;
   const { trade, supplier, buyer } = data;
