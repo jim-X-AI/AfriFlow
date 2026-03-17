@@ -24,3 +24,15 @@ dist-ssr
 *.sw?
 
 node_modules
+# Python
+__pycache__/
+*.pyc
+
+# Env
+.env
+
+# Uploads
+backend/uploads/
+
+# Node
+node_modules/
