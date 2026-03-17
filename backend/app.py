@@ -21,16 +21,34 @@ MAC_KEY = "secret"
 
 app = Flask(__name__)
 # CORS must include scheme (https://) to match browser Origin exactly.
-# Also scope it to `/api/*` since that's what the frontend calls.
+# Apply globally so even error responses include CORS headers.
 CORS(
     app,
-    resources={r"/api/*": {"origins": [
+    resources={r"/*": {"origins": [
         "http://localhost:3000",
         "https://afri-flow-two.vercel.app",
     ]}},
     allow_headers=["Content-Type", "Authorization"],
     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    supports_credentials=False,
 )
+
+
+@app.errorhandler(Exception)
+def handle_unexpected_error(err):
+    """
+    Ensure all unhandled errors return JSON (and therefore get CORS headers).
+    In production (Render), this prevents the browser from hiding server errors
+    behind a generic CORS failure.
+    """
+    try:
+        # If it's an HTTPException, it has a code; otherwise treat as 500.
+        code = getattr(err, "code", 500)
+        message = str(err) if app.debug else "Internal Server Error"
+    except Exception:
+        code = 500
+        message = "Internal Server Error"
+    return jsonify({"error": message}), code
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'afriflow.db')
