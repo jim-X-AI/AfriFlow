@@ -15,8 +15,8 @@ from werkzeug.utils import secure_filename
 import hashlib
 import requests
 
-INTERSWITCH_PAY_URL = "https://newwebpay.interswitchng.com/inline-checkout.js"
-# VERIFY_URL = "https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json"
+INTERSWITCH_PAY_URL = "https://webpay.interswitchng.com/collections/w/pay"
+VERIFY_URL = "https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json"
 MAC_KEY = "secret"
 
 app = Flask(__name__)
