@@ -48,11 +48,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-@app.route('/api/health', methods=['GET'])
-def health():
-    return jsonify({'ok': True})
-
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
