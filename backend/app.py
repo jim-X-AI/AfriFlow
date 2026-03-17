@@ -26,7 +26,7 @@ CORS(
     app,
     resources={r"/api/*": {"origins": [
         "http://localhost:3000",
-        "https://afri-flow-ytlu.vercel.app",
+        "https://afri-flow-two.vercel.app",
     ]}},
     allow_headers=["Content-Type", "Authorization"],
     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
