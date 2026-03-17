@@ -61,6 +61,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 db.init_app(app)
 
+# When running under Gunicorn (Render), `__main__` is NOT executed, so the
+# `db.create_all()` at the bottom never runs. Create tables at import time.
+with app.app_context():
+    db.create_all()
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'gif'}
 
 def allowed_file(filename):
